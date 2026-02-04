@@ -1,0 +1,26 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<h1>Products</h1>
+
+<table class="admin-table">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>₹ {{ product.price }}</td>
+        <td>{{ product.category }}</td>
+        <td>
+            <a href="{% url 'admin_edit_product' product.id %}">Edit</a>
+            <a href="{% url 'admin_delete_product' product.id %}" class="danger">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

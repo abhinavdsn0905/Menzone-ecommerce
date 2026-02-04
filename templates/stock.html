@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Collections | MENZONE</title>
+    <link rel="stylesheet" href="{% static 'common.css' %}">
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+    <link rel="stylesheet" href="{% static 'stock.css' %}">
+</head>
+<body>
+
+{% include 'includes/navbar.html' %}
+
+<div class="page-container">
+
+    <!-- SHIRTS -->
+    <h2 class="category-title">Shirts</h2>
+    <div class="collection-grid">
+        {% for product in shirts %}
+            {% include 'includes/product_card.html' %}
+        {% empty %}
+            <p>No shirts available</p>
+        {% endfor %}
+    </div>
+
+    <!-- T-SHIRTS -->
+    <h2 class="category-title">T-Shirts</h2>
+    <div class="collection-grid">
+        {% for product in tshirts %}
+            {% include 'includes/product_card.html' %}
+        {% empty %}
+            <p>No t-shirts available</p>
+        {% endfor %}
+    </div>
+
+    <!-- JEANS -->
+    <h2 class="category-title">Jeans</h2>
+    <div class="collection-grid">
+        {% for product in jeans %}
+            {% include 'includes/product_card.html' %}
+        {% empty %}
+            <p>No jeans available</p>
+        {% endfor %}
+    </div>
+
+    <!-- JACKETS -->
+    <h2 class="category-title">Jackets</h2>
+    <div class="collection-grid">
+        {% for product in jackets %}
+            {% include 'includes/product_card.html' %}
+        {% empty %}
+            <p>No jackets available</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% include 'includes/footer.html' %}
+</body>
+</html>

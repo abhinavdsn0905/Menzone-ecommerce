@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders | MENZONE</title>
+    <link rel="stylesheet" href="{% static 'common.css' %}">
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+</head>
+<body>
+
+{% include 'includes/navbar.html' %}
+
+<div class="admin-container">
+    <h2 class="admin-title">My Orders</h2>
+
+    {% for order in orders %}
+        <div style="margin-bottom:20px">
+            <strong>Order #{{ order.id }}</strong><br>
+            Date: {{ order.created_at|date:"d M Y, H:i" }}<br>
+            Total Amount: ₹ {{ order.total_amount }}
+        </div>
+        <hr>
+    {% empty %}
+        <p>You have not placed any orders yet.</p>
+    {% endfor %}
+</div>
+
+{% include 'includes/footer.html' %}
+
+</body>
+</html>

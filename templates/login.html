@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | MENZONE</title>
+    <link rel="stylesheet" href="{% static 'common.css' %}">
+    <link rel="stylesheet" href="{% static 'auth.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+</head>
+<body>
+
+{% include 'includes/navbar.html' %}
+
+<div class="form-box">
+    <h2>Login</h2>
+
+    <!-- EMAIL FORM -->
+    {% if not otp_sent %}
+    <form method="POST">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Enter Email" required>
+        <button type="submit" name="send_otp">Send OTP</button>
+    </form>
+    {% endif %}
+
+    <!-- OTP FORM -->
+    {% if otp_sent %}
+    <form method="POST">
+        {% csrf_token %}
+        <p class="small-text">OTP sent to {{ email }}</p>
+        <input type="text" name="otp" placeholder="Enter OTP" required>
+        <button type="submit" name="verify_otp">Verify & Login</button>
+    </form>
+    {% endif %}
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</div>
+
+{% include 'includes/footer.html' %}
+
+</body>
+</html>

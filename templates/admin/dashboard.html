@@ -1,0 +1,64 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<h1 class="page-title">Admin Dashboard</h1>
+
+<!-- STATS -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Total Products</h3>
+        <p>{{ product_count }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Orders</h3>
+        <p>{{ order_count }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Users</h3>
+        <p>{{ user_count }}</p>
+    </div>
+</div>
+
+<!-- USERS -->
+<h2 class="admin-section-title">Registered Users</h2>
+
+<div class="admin-table-wrapper">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date Joined</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ user.first_name|default:"-" }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.date_joined|date:"d M Y" }}</td>
+                <td>
+                    <a href="{% url 'admin_delete_user' user.id %}"
+                       class="btn-delete"
+                       onclick="return confirm('Delete this user?');">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align:center;">No users found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+.simple-footer {
+    background: #0b0b0b;
+    color: #bbb;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.footer-row {
+    padding: 15px 20px;
+}
+
+/* Row 1 */
+.footer-info {
+    border-bottom: 1px solid #222;
+    color: #aaa;
+}
+
+/* Row 2 */
+.footer-links a {
+    margin: 0 12px;
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}

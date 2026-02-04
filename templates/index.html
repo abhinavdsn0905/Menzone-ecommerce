@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MENZONE | Premium Men's Fashion</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'common.css' %}">
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+
+{% include 'includes/navbar.html' %}
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-container">
+        <!-- LEFT CONTENT -->
+        <div class="hero-content">
+            <h1>Upgrade Your<br>Style</h1>
+            <p>Premium Men’s Fashion — Shirts, Jeans, Jackets & More</p>
+            <a href="{% url 'stock' %}" class="hero-btn">Shop Now</a>
+        </div>
+
+        <!-- RIGHT FLOATING TEXT -->
+        <div class="hero-float">
+            <div class="float-text">
+                <span>MINIMAL</span>
+                <span>MODERN</span>
+                <span>MEN’S WEAR</span>
+                <span>CONFIDENCE</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CATEGORY SECTION ================= -->
+<section class="category-slider-section">
+    <h2 class="section-title dark">Shop by Category</h2>
+
+    <div class="category-slider">
+        <div class="category-track">
+
+            <a href="{% url 'stock' %}?category=Shirt" class="category-slide">
+                <img src="{% static 'images/shirt.jpg' %}">
+                <span>Shirts</span>
+            </a>
+
+            <a href="{% url 'stock' %}?category=Tshirt" class="category-slide">
+                <img src="{% static 'images/tshirt.jpg' %}">
+                <span>T-Shirts</span>
+            </a>
+
+            <a href="{% url 'stock' %}?category=Jeans" class="category-slide">
+                <img src="{% static 'images/jeans.jpg' %}">
+                <span>Jeans</span>
+            </a>
+
+            <a href="{% url 'stock' %}?category=Jacket" class="category-slide">
+                <img src="{% static 'images/jacket.jpg' %}">
+                <span>Jackets</span>
+            </a>
+
+            <!-- DUPLICATE FOR SMOOTH LOOP -->
+            <a href="{% url 'stock' %}?category=Shirt" class="category-slide">
+                <img src="{% static 'images/shirt.jpg' %}">
+                <span>Shirts</span>
+            </a>
+
+            <a href="{% url 'stock' %}?category=Tshirt" class="category-slide">
+                <img src="{% static 'images/tshirt.jpg' %}">
+                <span>T-Shirts</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+
+</body>
+</html>

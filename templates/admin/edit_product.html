@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product | Admin</title>
+    <link rel="stylesheet" href="{% static 'admin.css' %}">
+</head>
+<body>
+
+<div class="admin-container">
+    <h2 class="admin-title">Edit Product</h2>
+
+    <form method="post" enctype="multipart/form-data" class="admin-form">
+        {% csrf_token %}
+
+        <input type="text" name="name" value="{{ product.name }}" required>
+
+        <input type="number" step="0.01" name="price" value="{{ product.price }}" required>
+
+        <select name="category" required>
+            <option value="{{ product.category }}">{{ product.category }}</option>
+            <option value="Shirt">Shirt</option>
+            <option value="Jeans">Jeans</option>
+            <option value="Jacket">Jacket</option>
+            <option value="Tshirt">T-Shirt</option>
+        </select>
+
+        <textarea name="description" rows="4" required>{{ product.description }}</textarea>
+
+        <p><strong>Current Image:</strong></p>
+        <img src="{{ product.image.url }}" width="140"><br><br>
+
+        <input type="file" name="image">
+
+        <button type="submit" class="admin-btn">Update Product</button>
+    </form>
+
+    <br>
+    <a href="{% url 'admin_product_list' %}" class="admin-btn-light">← Back to Products</a>
+</div>
+
+</body>
+</html>

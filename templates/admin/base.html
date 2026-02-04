@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel | MENZONE</title>
+    <link rel="stylesheet" href="{% static 'admin.css' %}">
+</head>
+<body>
+
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+        <h2 class="admin-logo">MENZONE</h2>
+        <nav>
+            <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+            <a href="{% url 'admin_product_list' %}">Products</a>
+            <a href="{% url 'admin_add_product' %}">Add Product</a>
+            <a href="{% url 'admin_orders' %}">Orders</a>
+            <a href="{% url 'admin_logout' %}" class="logout">Logout</a>
+        </nav>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="admin-content">
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+
+</body>
+</html>

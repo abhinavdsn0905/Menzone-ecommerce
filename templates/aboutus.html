@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us | MENZONE</title>
+
+    <link rel="stylesheet" href="{% static 'common.css' %}">
+    <link rel="stylesheet" href="{% static 'aboutus.css' %}">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+</head>
+<body>
+
+    {% include 'includes/navbar.html' %}
+
+    <section class="about-section">
+        <div class="about-card">
+            <h1>About <span>MENZONE</span></h1>
+
+            <p>
+                MENZONE is a modern men’s fashion brand focused on delivering
+                <strong>premium-quality clothing</strong> with contemporary designs.
+            </p>
+
+            <p>
+                Our mission is to help men express <strong>confidence, comfort, and style</strong>
+                through carefully curated collections ranging from casual wear
+                to formal outfits.
+            </p>
+
+            <p class="highlight">
+                At MENZONE, fashion meets affordability — without compromising quality.
+            </p>
+        </div>
+    </section>
+
+    {% include 'includes/footer.html' %}
+
+</body>
+</html>
