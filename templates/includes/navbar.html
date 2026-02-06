@@ -10,7 +10,7 @@
             <a href="{% url 'home' %}">MENZONE</a>
         </div>
 
-        <!-- NAV LINKS -->
+        <!-- MAIN LINKS -->
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'stock' %}">Collections</a></li>
@@ -18,28 +18,27 @@
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
-        <!-- RIGHT ACTIONS -->
+        <!-- ACTIONS -->
         <div class="nav-actions">
             {% if user.is_authenticated %}
                 <a href="{% url 'cart' %}" class="nav-link-btn">
                     🛒 Cart
                 </a>
 
+                <a href="{% url 'user_orders' %}" class="nav-link-btn">
+                    📦 My Orders
+                </a>
+
                 <span class="welcome-text">
-                    Hi, {{ user.first_name }}
+                    Hi, {{ user.first_name|default:user.username }}
                 </span>
 
                 <a href="{% url 'logout' %}" class="nav-btn-outline">
                     Logout
                 </a>
             {% else %}
-                <a href="{% url 'login' %}" class="nav-link-btn">
-                    Login
-                </a>
-
-                <a href="{% url 'register' %}" class="nav-btn">
-                    Register
-                </a>
+                <a href="{% url 'login' %}" class="nav-link-btn">Login</a>
+                <a href="{% url 'register' %}" class="nav-btn">Register</a>
             {% endif %}
         </div>
 

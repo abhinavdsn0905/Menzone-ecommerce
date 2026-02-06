@@ -7,10 +7,12 @@
 
 {% block content %}
 <div class="cart-container">
+
     <h2>Your Shopping Cart</h2>
 
     {% if cart_items %}
         <div class="cart-table">
+
             <div class="cart-header">
                 <span>Product</span>
                 <span>Price</span>
@@ -21,8 +23,9 @@
 
             {% for item in cart_items %}
             <div class="cart-row">
+
                 <div class="cart-product">
-                    <img src="{{ item.product.image.url }}">
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                     <span>{{ item.product.name }}</span>
                 </div>
 
@@ -30,22 +33,32 @@
                 <span>{{ item.quantity }}</span>
                 <span>₹ {{ item.total_price }}</span>
 
-                <a href="{% url 'remove_from_cart' item.id %}" class="remove-btn">✖</a>
+                <a href="{% url 'remove_from_cart' item.id %}" class="remove-btn">
+                    ✖
+                </a>
             </div>
             {% endfor %}
+
         </div>
 
         <div class="cart-summary">
             <h3>Cart Summary</h3>
+
             <p><b>Total Items:</b> {{ total_items }}</p>
             <p><b>Grand Total:</b> ₹ {{ grand_total }}</p>
 
-            <a href="{% url 'checkout' %}" class="checkout-btn">
-                Proceed to Checkout
-            </a>
+            <!-- IMPORTANT: POST checkout -->
+            <form method="POST" action="{% url 'checkout' %}">
+                {% csrf_token %}
+                <button type="submit" class="checkout-btn">
+                    Proceed to Checkout
+                </button>
+            </form>
         </div>
+
     {% else %}
         <p class="empty-cart">🛒 Your cart is empty</p>
     {% endif %}
+
 </div>
 {% endblock %}

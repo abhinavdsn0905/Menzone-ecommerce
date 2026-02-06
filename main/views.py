@@ -104,7 +104,6 @@ def login_user(request):
 
         otp = str(random.randint(100000, 999999))
 
-        # Save OTP 
         EmailOTP.objects.create(email=email, otp=otp)
 
         send_mail(
@@ -120,7 +119,6 @@ def login_user(request):
         context['email'] = email
         return render(request, 'login.html', context)
 
-    # VERIFY OTP
     if request.method == "POST" and 'verify_otp' in request.POST:
         email = request.session.get('login_email')
         entered_otp = request.POST.get('otp')
@@ -193,13 +191,17 @@ def remove_from_cart(request, item_id):
     cart_item.delete()
     return redirect('cart')
 
-@login_required
+@login_required(login_url='login')
 def checkout(request):
-    cart = request.session.get('cart', {})
-
-    if not cart:
+    if request.method != "POST":
         return redirect('cart')
 
+    cart_items = CartItem.objects.filter(user=request.user)
+
+    if not cart_items.exists():
+        return redirect('cart')
+
+    # Create Order
     order = Order.objects.create(
         user=request.user,
         status='Placed'
@@ -207,16 +209,14 @@ def checkout(request):
 
     total = Decimal('0.00')
 
-    for product_id, quantity in cart.items():
-        product = Product.objects.get(id=product_id)
-
-        price = Decimal(product.price) * quantity
+    for item in cart_items:
+        price = Decimal(item.product.price) * item.quantity
 
         OrderItem.objects.create(
             order=order,
-            product=product,
-            quantity=quantity,
-            price=product.price
+            product=item.product,
+            quantity=item.quantity,
+            price=item.product.price
         )
 
         total += price
@@ -224,22 +224,17 @@ def checkout(request):
     order.total_amount = total
     order.save()
 
+    # 📧 Email confirmation
     subject = f"Order Confirmed - MENZONE (Order #{order.id})"
-
     message = f"""
 Hello {request.user.first_name or request.user.username},
 
 Thank you for shopping with MENZONE 🖤
 
-🧾 Order Details
--------------------------
 Order ID: {order.id}
 Total Amount: ₹{order.total_amount}
-Order Status: {order.status}
+Status: {order.status}
 
-We’ll notify you once your order is shipped.
-
-Happy Shopping!
 MENZONE Team
 """
 
@@ -251,7 +246,7 @@ MENZONE Team
         fail_silently=False
     )
 
-    request.session['cart'] = {}
+    cart_items.delete()
 
     return redirect('user_orders')
 
