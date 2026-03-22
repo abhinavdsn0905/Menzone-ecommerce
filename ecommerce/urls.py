@@ -6,8 +6,14 @@ from django.conf.urls.static import static
 from main import views as user_views
 from adminpanel import views as admin_views
 
+from django.http import HttpResponse
+
+def ping(request):
+    return HttpResponse("<h2>PONG - Django is officially working on Vercel!</h2><p>The 500 error on your home page is just a <b>Database Connection Timeout</b>. Vercel is trying to connect to your local database (127.0.0.1) and timing out after 10 seconds. Add your cloud database environment variables to fix the home page!</p>")
+
 urlpatterns = [
 
+    path('ping/', ping),
     path('django-admin/', admin.site.urls),
 
     # ---------------- USER SIDE ----------------
